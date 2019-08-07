@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1564323422 source:c:\users\leo\desktop\tecnico-universitario-en-programacion\cuatrimestre i\laboratorio i\resolucion de la guia\maximos y minimos\ejercicio 50\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+

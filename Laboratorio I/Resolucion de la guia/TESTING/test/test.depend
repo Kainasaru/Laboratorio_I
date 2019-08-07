@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1564842714 source:c:\users\leo\desktop\tecnico-universitario-en-programacion\cuatrimestre i\laboratorio i\resolucion de la guia\testing\test\main.c
+	<stdio.h>
+	<stdlib.h>
+	"numstring.h"
+
+1564844101 source:c:\users\leo\desktop\tecnico-universitario-en-programacion\cuatrimestre i\laboratorio i\resolucion de la guia\testing\test\numstring.c
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"numstring.h"
+
+1564844131 c:\users\leo\desktop\tecnico-universitario-en-programacion\cuatrimestre i\laboratorio i\resolucion de la guia\testing\test\numstring.h
+

@@ -1,0 +1,8 @@
+myFlush
+void myFlush()
+{
+int diff, i=0;
+diff = stdin->_IO_read_end - stdin->_IO_read_ptr;
+for(i=0; i<diff; i++)
+getchar();
+}

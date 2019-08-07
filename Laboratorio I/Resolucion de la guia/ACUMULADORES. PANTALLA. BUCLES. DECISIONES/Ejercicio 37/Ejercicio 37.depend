@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1564051281 source:c:\users\leo\desktop\tecnico-universitario-en-programacion\cuatrimestre i\laboratorio i\resolucion de la guia\acumuladores. pantalla. bucles. decisiones\ejercicio 37\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+

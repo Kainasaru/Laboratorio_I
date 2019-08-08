@@ -291,25 +291,3 @@ int contract(char* str, int index)
     }
     return ret;
 }
-
-/** \brief Determina si una cadena numerica cabe en una variable de tipo signed int.
- *
- * \param str: Cadena a verificar.
- * \return Devuelve cero
- *
- */
-
-int isSignedINTStr(char* str)
-{
-    int ret = 0;
-    if(str != NULL && isIntegerStr(str))
-    {
-        numStrFixer(str);
-        if( ( sizeof(int) == 2 && numStrCmp(str,"32767") <= 0 && numStrCmp(str,"-32768") >= 0 )       ||
-           (sizeof(int) == 4 && numStrCmp(str,"2147483647") <= 0 && numStrCmp(str,"−2147483647") >= 0) )
-        {
-            ret = 1;
-        }
-    }
-    return ret;
-}

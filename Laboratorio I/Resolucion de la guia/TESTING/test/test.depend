@@ -12,3 +12,18 @@
 
 1564844131 c:\users\leo\desktop\tecnico-universitario-en-programacion\cuatrimestre i\laboratorio i\resolucion de la guia\testing\test\numstring.h
 
+1564840170 source:c:\users\leo\desktop\laboratorio_i\laboratorio i\resolucion de la guia\testing\test\numstring.c
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	"numstring.h"
+
+1565263314 c:\users\leo\desktop\laboratorio_i\laboratorio i\resolucion de la guia\testing\test\numstring.h
+
+1565279157 source:c:\users\leo\desktop\laboratorio_i\laboratorio i\resolucion de la guia\testing\test\main.c
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+	<math.h>
+	"numstring.h"
+

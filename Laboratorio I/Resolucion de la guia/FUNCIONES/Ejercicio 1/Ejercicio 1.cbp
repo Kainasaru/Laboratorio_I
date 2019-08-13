@@ -31,9 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="input.h" />
+		<Unit filename="input.o" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="numericstring.h" />
+		<Unit filename="numericstring.o" />
 		<Extensions>
 			<code_completion />
 			<envvars />

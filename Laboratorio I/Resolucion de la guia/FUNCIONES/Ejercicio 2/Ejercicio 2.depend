@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1565540271 source:c:\users\leo\desktop\laboratorio_i\laboratorio i\resolucion de la guia\funciones\ejercicio 2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<limits.h>
+	"input.h"
+	"numericstring.h"
+
+1565453227 c:\users\leo\desktop\laboratorio_i\laboratorio i\resolucion de la guia\funciones\ejercicio 2\input.h
+
+1565383188 c:\users\leo\desktop\laboratorio_i\laboratorio i\resolucion de la guia\funciones\ejercicio 2\numericstring.h
+

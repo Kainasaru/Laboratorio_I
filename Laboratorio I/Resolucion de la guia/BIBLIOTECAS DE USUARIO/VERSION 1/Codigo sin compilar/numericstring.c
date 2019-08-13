@@ -1,11 +1,15 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include "numstring.h"
+#include <limits.h>
+#include <math.h>
+#include "numericstring.h"
 /* Prototipos de funciones privadas */
 
 static int strLenCmp(char* str1, char* str2);
 static int chrCmp(char chr1, char chr2 );
+static int isWithinRange(char* num, char* max, char* min);
 
 /* FIN PROTIPOS */
 
@@ -60,6 +64,26 @@ static int chrCmp(char chr1, char chr2 )
     return ret;
 }
 
+/** \brief Verifica si una cadena numerica pertenece a un rango numerico.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \param min: Valor minimo (Incluido).
+ * \param max: Valor maximo (Incluido).
+ * \return Devuelve [1] si la cadena pertenece al intervalo (rango) o [0] en caso contrario.
+ *
+ */
+
+static int isWithinRange(char* num, char* min, char* max)
+{
+    int ret = 0;
+    if( num != NULL && isNumericStr(num) && numStrCmp(num,max) <= 0
+            && numStrCmp(num,min) >= 0)
+    {
+        ret = 1;
+    }
+    return ret;
+}
+
 /* FIN FUNCIONES PRIVADAS */
 
 /* ---------------------------- */
@@ -92,7 +116,7 @@ int isNumericStr(char* num )
         int i = 0;
         while( i < strlen(num) )
         {
-            if( pointFlag == 1 && num[i] == '.' && i >= minimumPointIndex && num[i+1] != '\0')
+            if(  num[i] == '.' && pointFlag == 1 && i >= minimumPointIndex && num[i+1] != '\0')
             {
                 pointFlag = 0;
             }
@@ -225,13 +249,13 @@ int numStrCmp(char* num1, char* num2 )
             {
                 if( num1[i] != num2[i])
                 {
-                    ret = chrCmp(num1[i],num2[i]);
+                    ret = chrCmp(num1[i],num2[i]); // Comparo los caracteres por valor ascii.
                     break;
                 }
             }
             if( ret == 0 ) //Si los numeros son iguales puede que uno sea mas largo que el otro.
             {
-                ret = strLenCmp(num1,num2);
+                ret = strLenCmp(num1,num2); // Comparo por longitud.
             }
         }
         if(num1[0] == '-' && num2[0] == '-') //Si ambos numeros son negativos se invierte el signo.
@@ -288,6 +312,134 @@ int contract(char* str, int index)
         {
             str[i] = str[i+1];
         }
+    }
+    return ret;
+}
+
+/** \brief Verifica si una cadena numerica cabe en una variable de tipo signed short.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \return Devuelve [1] en caso afirmativo o cero [0] en caso negativo.
+ *
+ */
+
+int isSignedSHORT(char* num)
+{
+    char maxLimit[128] = {};
+    char minLimit[128] = {};
+    sprintf(maxLimit,"%d",SHRT_MAX);
+    sprintf(minLimit,"%d",SHRT_MIN);
+    return isIntegerStr(num) && isWithinRange(num,minLimit,maxLimit);
+}
+
+/** \brief Verifica si una cadena numerica cabe en una variable de tipo unsigned short.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \return Devuelve [1] en caso afirmativo o cero [0] en caso negativo.
+ *
+ */
+
+int isUnsignedSHORT(char* num)
+{
+	char maxLimit[128] = {};
+    sprintf(maxLimit,"%d",USHRT_MAX);
+    return isIntegerStr(num) && isWithinRange(num,"0",maxLimit);
+}
+
+/** \brief Verifica si una cadena numerica cabe en una variable de tipo signed int.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \return Devuelve [1] en caso afirmativo o cero [0] en caso negativo.
+ *
+ */
+
+int isSignedINT(char* num)
+{
+    char maxLimit[128] = {};
+    char minLimit[128] = {};
+    sprintf(maxLimit,"%d",INT_MAX);
+    sprintf(minLimit,"%d",INT_MIN);
+    return isIntegerStr(num) && isWithinRange(num,minLimit,maxLimit);
+}
+
+/** \brief Verifica si una cadena numerica cabe en una variable de tipo unsigned int.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \return Devuelve [1] en caso afirmativo o cero [0] en caso negativo.
+ *
+ */
+
+int isUnsignedINT(char* num)
+{
+	char maxLimit[128] = {};
+    sprintf(maxLimit,"%d",UINT_MAX);
+    return isWithinRange(num,"0",maxLimit);
+}
+
+/** \brief Verifica si una cadena numerica cabe en una variable de tipo signed long.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \return Devuelve [1] en caso afirmativo o cero [0] en caso negativo.
+ *
+ */
+
+int isSignedLONG(char* num)
+{
+    char maxLimit[128] = {};
+    char minLimit[128] = {};
+    sprintf(maxLimit,"%ld",LONG_MAX);
+    sprintf(minLimit,"%ld",LONG_MIN);
+    return isIntegerStr(num) && isWithinRange(num,minLimit,maxLimit);
+}
+
+/** \brief Verifica si una cadena numerica cabe en una variable de tipo unsigned long.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \return Devuelve [1] en caso afirmativo o cero [0] en caso negativo.
+ *
+ */
+
+int isUnsignedLONG(char* num)
+{
+	char maxLimit[128] = {};
+    sprintf(maxLimit,"%d",ULONG_MAX);
+    return isIntegerStr(num) && isWithinRange(num,"0",maxLimit);
+}
+
+/** \brief Verifica si una cadena numerica cabe en una variable de tipo float.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \return Devuelve [1] en caso afirmativo o cero [0] en caso negativo.
+ *
+ */
+
+int isFLOAT(char* num)
+{
+    int ret = 0;
+    if(num != NULL && strlen(num) <= 17)
+    {
+        ret = isWithinRange(num,"-16777215","16777215"); //Valor que evita muchos errores de precision de un float.
+    }
+    return ret;
+}
+
+/** \brief Verifica si una cadena numerica cabe en una variable de tipo double.
+ *
+ * \param num: Cadena numerica a verificar.
+ * \return Devuelve [1] en caso afirmativo o cero [0] en caso negativo.
+ *
+ */
+
+int isDOUBLE(char* num)
+{
+    int ret = 0;
+    if(num != NULL && strlen(num) <= 26)
+    {
+        char maxLimit[128] = {};
+        char minLimit[128] = {};
+        sprintf(maxLimit,"lf",pow(2,54));
+        sprintf(minLimit,"lf",-pow(2,54));
+        ret = isWithinRange(num,minLimit,maxLimit); //Valor que evita muchos errores de precision de un float.
     }
     return ret;
 }

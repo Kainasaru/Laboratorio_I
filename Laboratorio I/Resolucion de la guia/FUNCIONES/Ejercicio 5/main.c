@@ -36,22 +36,15 @@ int charRepeater(char character, int times)
 int displayOptMenu(char* title, char* text)
 {
     int optNumber = 0;
-    int characterCounter = 0; //Variable para generar un enter si la opcion se hace muy larga
     int i = 0;
-    if(text != NULL && title != NULL && strlen(text) > 0 )
+    if(text != NULL && title != NULL )
     {
-        charRepeater(' ',20);
-        if( strlen(title) <= 26 )
+        charRepeater('-',80); //Decoracion
+        if( title[0] != '\0' && strlen(title) <= 75)
         {
-            charRepeater('-',30);
-            printf("\n");
-            charRepeater(' ',20);
-            printf("* %s *\n",title);
-            charRepeater(' ',20);
-            charRepeater('-',30);
-            printf("\n");
+            printf("* %s *\n",title); //Titulo del menu
+            charRepeater('-',80); //Decoracion
         }
-        charRepeater(' ',20);
         while(i < strlen(text) )
         {
             if( i == 0 )
@@ -62,28 +55,17 @@ int displayOptMenu(char* title, char* text)
             if( text[i] == '\n' && text[i+1] != '\0' )
             {
                 optNumber++;
-                characterCounter = 0;
-                printf("\n");
-                charRepeater(' ',20);
-                printf("<%d> ",optNumber); //Coloco el salto de linea.
+                printf("\n<%d> ",optNumber); //Coloco el salto de linea.
                 i++;
             }
             printf("%c",text[i]);
-            characterCounter++;
-            if(characterCounter == 30)
-            {
-                printf("\n");
-                charRepeater(' ',20);
-                characterCounter = 0;
-            }
             i++;
         }
         if( text[i-1] != '\n')
         {
             printf("\n");
         }
-        charRepeater(' ',20);
-        charRepeater('-',30);
+        charRepeater('-',80);
     }
     return i;
 }
